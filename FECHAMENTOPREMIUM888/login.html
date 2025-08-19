@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Fechamento Premium</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0d021f, #1a0030);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .login-container {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 420px;
+    }
+    input[type="email"] {
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      background-color: #ffcc00;
+      color: #1c0037;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ffcc00aa;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #ffe066;
+    }
+    .mensagem {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Fechamento Premium Lotofácil</h1>
+    <p>Digite seu e-mail para acessar</p>
+    <input type="email" id="email" placeholder="Seu e-mail" required />
+    <button id="entrar">Entrar</button>
+    <div class="mensagem" id="mensagem"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('entrar');
+    const emailEl = document.getElementById('email');
+    const msg = document.getElementById('mensagem');
+
+    async function verificarLogin() {
+      const email = emailEl.value.trim();
+
+      if (!email) {
+        msg.textContent = "Por favor, insira seu e-mail.";
+        return;
+      }
+
+      msg.textContent = "Verificando assinatura...";
+
+      try {
+        const resposta = await fetch("/.netlify/functions/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await resposta.json();
+
+        if (resposta.ok && data.active) {
+          localStorage.setItem("usuario_logado", "sim");
+          window.location.href = "index.html";
+        } else {
+          const reason = data && data.reason;
+          if (reason === "not-found") {
+            msg.textContent = "Assinatura não encontrada para este e-mail. Verifique a digitação.";
+          } else if (reason === "missing-or-invalid-email") {
+            msg.textContent = "E-mail inválido.";
+          } else {
+            msg.textContent = "Assinatura não ativa. Se você assinou agora, aguarde alguns segundos e tente novamente.";
+          }
+        }
+      } catch (e) {
+        msg.textContent = "Erro ao verificar assinatura. Tente novamente.";
+      }
+    }
+
+    btn.addEventListener('click', verificarLogin);
+    emailEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') verificarLogin();
+    });
+  </script>
+</body>
+</html>

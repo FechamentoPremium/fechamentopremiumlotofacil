@@ -1,0 +1,209 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f6ff;
+  color: #333;
+  padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #7200b8;
+  font-size: 2em;
+}
+
+/* Botões de fechamento */
+#botoes-fechamento {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#botoes-fechamento button {
+  background-color: #a55eea;
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#botoes-fechamento button:hover {
+  background-color: #7200b8;
+}
+
+/* Mensagem informativa */
+.obs {
+  background-color: #fff3fd;
+  border-left: 4px solid #c52bcf;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.obs .nao {
+  color: red;
+  font-weight: bold;
+}
+
+.obs .errado {
+  color: #b00020;
+  display: block;
+  margin-top: 4px;
+}
+
+.obs .certo {
+  color: #008000;
+  display: block;
+}
+
+/* Dezenas */
+#dezenas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+
+#dezenas-grid button {
+  background-color: #e0d4ff;
+  border: 2px solid #a55eea;
+  border-radius: 6px;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#dezenas-grid button.selected {
+  background-color: #7200b8;
+  color: #fff;
+}
+
+/* Ações */
+.acoes {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.acoes button {
+  background-color: #7200b8;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.acoes button:hover {
+  background-color: #5d0097;
+}
+
+/* Jogos */
+#lista-jogos {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f3edff;
+  border-radius: 6px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#lista-jogos div {
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 8px;
+  background: #fff;
+  border-left: 4px solid #a55eea;
+  border-radius: 4px;
+}
+
+/* Filtros */
+#filtros {
+  background: #f3f3ff;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#filtros label {
+  display: block;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+#filtros button {
+  background-color: #7200b8;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  margin-top: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#filtros button:hover {
+  background-color: #5d0097;
+}
+
+/* Botão salvar */
+#salvar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#salvar button {
+  background-color: #00c853;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#salvar button:hover {
+  background-color: #009624;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  #dezenas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #botoes-fechamento {
+    flex-direction: column;
+    align-items: center;
+  }
+}
